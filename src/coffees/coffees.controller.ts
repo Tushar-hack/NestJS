@@ -1,5 +1,9 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Req } from '@nestjs/common';
-import { Request } from 'express';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post} from '@nestjs/common';
+
+interface RequestBody{
+    "name": String,
+    "github" : String
+}
 
 @Controller('coffees')
 export class CoffeesController {
@@ -15,7 +19,17 @@ export class CoffeesController {
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
-    create(@Body() body) {
+    create(@Body() body): RequestBody{
         return body;
+    }
+
+    @Patch(':id')
+    update(@Param('id') id:String, @Body() body): String{
+        return `This action updates ${id} coffee`;
+    }
+
+    @Delete(':id')
+    remove(@Param('id') id:String): String{
+        return `This action removes ${id} coffee`;
     }
 }
