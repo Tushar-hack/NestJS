@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post} from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query} from '@nestjs/common';
+import { off } from 'process';
 
 interface RequestBody{
     "name": String,
@@ -8,8 +9,9 @@ interface RequestBody{
 @Controller('coffees')
 export class CoffeesController {
     @Get('flavors')
-    findAll(): String{
-        return "This action return all coffees."
+    findAll(@Query() paginationQuery): String{
+        const {limit, offset} = paginationQuery;
+        return `This action return all coffees. Limit: ${limit}, Offset: ${offset}`;
     }
 
     @Get(':id/:username')
