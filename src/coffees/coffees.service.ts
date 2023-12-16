@@ -1,14 +1,16 @@
 import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { Coffee } from './entities/coffee.entity';
+import { CreateCoffeeDto } from './dto/create-coffee.dto';
+import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 
 @Injectable()
 export class CoffeesService {
-    private coffees: Coffee[] = [
+    private coffees: CreateCoffeeDto[] = [
         {
             id:1,
             name: 'Shipwreck',
             brand: 'Buddy Brew',
-            flavors: 'choclate',
+            flavors: ['choclate'],
         }
     ];
 
@@ -25,11 +27,11 @@ export class CoffeesService {
         return coffee;
     }
 
-    create(createCoffeeDto: Coffee) {
+    create(createCoffeeDto: CreateCoffeeDto) {
         this.coffees.push(createCoffeeDto);
     }
 
-    update(id: string, updateCoffeeDto: any) {
+    update(id: string, updateCoffeeDto: UpdateCoffeeDto) {
         const existingCoffee = this.findOne(id);
         if(existingCoffee){
             
