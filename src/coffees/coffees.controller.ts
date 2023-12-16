@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query} from '@nestjs/common';
-import { off } from 'process';
+import { CoffeesService } from './coffees.service';
 
 interface RequestBody{
     "name": String,
@@ -8,30 +8,34 @@ interface RequestBody{
 
 @Controller('coffees')
 export class CoffeesController {
-    @Get('flavors')
-    findAll(@Query() paginationQuery): String{
-        const {limit, offset} = paginationQuery;
-        return `This action return all coffees. Limit: ${limit}, Offset: ${offset}`;
+
+    constructor(private readonly coffeesService: CoffeesService) {}
+
+
+    @Get()
+    findAll(@Query() paginationQuery){
+        // const {limit, offset} = paginationQuery;
+        return this.coffeesService.findAll();
     }
 
-    @Get(':id/:username')
-    findOne(@Param() param): String{
-        return `This action returns ${param.id} coffee for ${param.username}`;
+    @Get(':id')
+    findOne(@Param() param){
+        return this.coffeesService.findOne(param.id);
     }
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
-    create(@Body() body): RequestBody{
-        return body;
+    create(@Body() body){
+        return this.coffeesService.create(body);
     }
 
     @Patch(':id')
-    update(@Param('id') id:String, @Body() body): String{
-        return `This action updates ${id} coffee`;
+    update(@Param('id') id:string, @Body() body){
+        return this.coffeesService.update(id, body);
     }
 
     @Delete(':id')
-    remove(@Param('id') id:String): String{
-        return `This action removes ${id} coffee`;
+    remove(@Param('id') id:string){
+        return this.coffeesService.remove(id);
     }
 }
