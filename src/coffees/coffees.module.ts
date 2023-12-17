@@ -10,3 +10,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     exports: [CoffeesModule]
 })
 export class CoffeesModule {}
+
+
+// Repository Class act as an abstraction over data sources and exposes a variety of useful methods to interact with the data stored in our database.
