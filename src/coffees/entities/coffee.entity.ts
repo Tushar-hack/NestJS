@@ -1,11 +1,14 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, Index, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Flavor } from "./flavor.entity";
 
+
+// @Index(['name', 'id']) composite Indexes
 @Entity()
 export class Coffee{
     @PrimaryGeneratedColumn()
     id: number;
 
+    // @Index() single indexes
     @Column()
     name: string;
 

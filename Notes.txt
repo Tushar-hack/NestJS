@@ -5,3 +5,9 @@ Advanced way := Nest Scope providers and Interceptors to automatically wrap ever
 
 
 Indexes are special lookup tables that our database search engine can use to speed up data retrieval.
+
+Indexes can help give our application both rapid random lookups and efficient access of ordered records.
+Use them whenever performence is vitally important for a certain Entity.
+
+
+Database migration provide a way to incrementally update our database schema and keep it in sync with the application data model, all while preserving existing data in our database.
